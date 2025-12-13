@@ -18,5 +18,11 @@ def update_rpc(rpc: Presence, activity: Activity):
 		large_image='anilist_logo_svg',
 		name=activity.__str__(),
 		details='Last AniList activity',
-		state=activity.__str__()
+		state=activity.__str__(),
+		buttons=[
+			{
+				'label': 'Voir sur AniList',
+				'url': activity.site_url
+			}
+		]
 	)

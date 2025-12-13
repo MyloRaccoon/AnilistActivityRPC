@@ -40,6 +40,7 @@ def get_last_activity(userId: int) -> Activity|None:
 			progress
 			media {
 			  title { romaji }
+			  siteUrl
 			}
 		  }
 		}
@@ -65,9 +66,11 @@ def get_last_activity(userId: int) -> Activity|None:
 	status = activity_data['status']
 	progress = activity_data['progress']
 	title = activity_data['media']['title']['romaji']
+	site_url = activity_data['media']['siteUrl']
 	return Activity(
 		_id,
 		status,
 		title,
-		progress
+		progress,
+		site_url
 	)
