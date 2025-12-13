@@ -7,7 +7,7 @@ import time
 load_dotenv()
 ANILIST_USERNAME=getenv('ANILIST_USERNAME')
 ANILIST_USERID=get_user_id(ANILIST_USERNAME)
-
+UPDATE_FREQUENCE=int(getenv('UPDATE_FREQUENCE'))
 
 rpc = connect_rpc()
 
@@ -24,7 +24,7 @@ try:
             activity = new_activity
             update_rpc(rpc, activity)
             print('rpc updated')
-        time.sleep(3)
+        time.sleep(UPDATE_FREQUENCE)
 except KeyboardInterrupt:
     rpc.clear()
     rpc.close()
