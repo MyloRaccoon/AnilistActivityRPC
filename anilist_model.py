@@ -35,6 +35,7 @@ def get_last_activity(userId: int) -> Activity|None:
 	  Page(page: 1, perPage: 2) {
 		activities(userId: $userId, sort: ID_DESC, type: MEDIA_LIST) {
 		  ... on ListActivity {
+		    id
 			status
 			progress
 			media {
@@ -60,10 +61,12 @@ def get_last_activity(userId: int) -> Activity|None:
 		return None
 
 	activity_data = data['data']['Page']['activities'][0]
+	_id = activity_data['id']
 	status = activity_data['status']
 	progress = activity_data['progress']
 	title = activity_data['media']['title']['romaji']
 	return Activity(
+		_id,
 		status,
 		title,
 		progress
