@@ -26,7 +26,7 @@ try:
         if activity != new_activity:
             activity = new_activity
             update_rpc(rpc, activity)
-            log('RPC updated')
+            log(f'RPC updated, new activity: {activity}')
         time.sleep(UPDATE_FREQUENCE)
 except KeyboardInterrupt:
     rpc.clear()

@@ -1,5 +1,6 @@
 import requests
 from activity import Activity
+from logger import log
 
 URL = "https://graphql.anilist.co"
 
@@ -23,7 +24,7 @@ def get_user_id(name: str) -> int|None:
 	data = response.json()
 
 	if data.get('errors'):
-		print('Error: Anilist user "{name}" not found')
+		log('Error: Anilist user "{name}" not found')
 		return None
 
 	return int(data['data']['User']['id'])
@@ -58,7 +59,7 @@ def get_last_activity(userId: int) -> Activity|None:
 	data = response.json()
 
 	if data.get('errors'):
-		print(f'Error while getting activities: {data['errors'][0]['message']}')
+		log(f'Error while getting activities: {data['errors'][0]['message']}')
 		return None
 
 	activity_data = data['data']['Page']['activities'][0]
