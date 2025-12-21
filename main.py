@@ -32,8 +32,8 @@ icon = Icon(
 	'AniList Activity RPC',
 	icon= Image.open(ICON_PATH),
 	menu= Menu(
-		MenuItem('Update', on_update_clicked)
-		MenuItem('Quit', on_quit_clicked),
+		MenuItem('Update', on_update_clicked),
+		MenuItem('Quit', on_quit_clicked)
 	)
 )
 
