@@ -12,7 +12,7 @@ ANILIST_USERID=get_user_id(ANILIST_USERNAME)
 UPDATE_FREQUENCE=int(getenv('UPDATE_FREQUENCE'))
 
 
-class App:
+class Server:
 
     def __init__(self):
         self.rpc = RPC()

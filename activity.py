@@ -11,4 +11,10 @@ class Activity:
 		return f"{self.status} {self.progress} of {self.title}"
 
 	def __eq__(self, other):
-		return self.id == other.id
+		return (
+			self.id == other.id
+			and self.status == other.status
+			and self.title == other.title
+			and self.progress == other.progress
+			and self.site_url == other.site_url
+		) 

@@ -1,7 +1,7 @@
 from pystray import Icon, Menu, MenuItem 
 from PIL import Image
 import threading
-import server
+from server import Server
 from dotenv import load_dotenv
 from os import getenv
 
@@ -10,11 +10,11 @@ ICON_PATH = getenv('ICON_PATH')
 
 stop_event = threading.Event()
 
-app = server.App()
+server = Server()
 
 
 def on_update_clicked(icon, item):
-	app.manual_update()
+	server.manual_update()
 
 def on_quit_clicked(icon, item):
 	stop_event.set()
@@ -22,7 +22,7 @@ def on_quit_clicked(icon, item):
 
 
 threading.Thread(
-	target=app.run,
+	target=server.run,
 	args=(stop_event,),
 	daemon=True
 ).start()
