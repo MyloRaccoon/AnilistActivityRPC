@@ -8,7 +8,9 @@ class Activity:
 		self.site_url = site_url
 
 	def __str__(self) -> str:
-		return f"{self.status} {self.progress} of {self.title}"
+		with_prog = f"{self.status} {self.progress} of {self.title}"
+		without_prog = f"{self.status} {self.title}"
+		return with_prog if not self.progress is None else without_prog
 
 	def __eq__(self, other):
 		return (

@@ -16,12 +16,12 @@ class RPC:
 		self.presence.update(
 			activity_type=ActivityType.WATCHING,
 			large_image='anilist_logo_svg',
-			name=activity.__str__(),
+			name=activity.title,
 			details='Last AniList activity',
 			state=activity.__str__(),
 			buttons=[
 				{
-					'label': 'Voir sur AniList',
+					'label': 'see on AniList',
 					'url': activity.site_url
 				}
 			]
