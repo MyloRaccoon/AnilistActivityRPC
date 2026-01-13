@@ -4,6 +4,9 @@ import threading
 from server import Server
 from dotenv import load_dotenv
 from os import getenv
+import os, sys
+
+os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 load_dotenv()
 ICON_PATH = getenv('ICON_PATH')
