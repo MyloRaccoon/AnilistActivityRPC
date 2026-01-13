@@ -21,7 +21,7 @@ class RPC:
 			state=activity.__str__(),
 			buttons=[
 				{
-					'label': 'see on AniList',
+					'label': 'See on AniList',
 					'url': activity.site_url
 				}
 			]
