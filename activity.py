@@ -13,6 +13,8 @@ class Activity:
 		return with_prog if not self.progress is None else without_prog
 
 	def __eq__(self, other):
+		if not isinstance(other, Activity):
+			return False
 		return (
 			self.id == other.id
 			and self.status == other.status
