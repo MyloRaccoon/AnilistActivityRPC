@@ -26,3 +26,7 @@ class RPC:
 				}
 			]
 		)
+
+	def close(self):
+		self.presence.clear()
+		self.presence.close()

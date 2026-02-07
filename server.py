@@ -14,34 +14,39 @@ UPDATE_FREQUENCE=int(getenv('UPDATE_FREQUENCE'))
 
 class Server:
 
-    def __init__(self):
+    def __init__(self, on_activity_changed=None):
         self.rpc = RPC()
+        self.activity = None
+        self.on_activity_changed = on_activity_changed
 
     def manual_update(self) -> Activity:
-        activity = get_last_activity(ANILIST_USERID)
-        self.rpc.update(activity)
+        self.activity = get_last_activity(ANILIST_USERID)
+        self.rpc.update(self.activity)
+        if self.on_activity_changed:
+            self.on_activity_changed()
 
-        log(f'RPC updated, new activity: {activity}')
+        log(f'RPC updated, new activity: {self.activity}')
 
-        return activity
 
     def run(self, stop_event):
 
         log('AniList Discord RPC Launched')
 
-        activity = self.manual_update()
+        self.manual_update()
 
         log('RPC active')
 
         while not stop_event.is_set():
             new_activity = get_last_activity(ANILIST_USERID)
-            if activity != new_activity:
-                activity = new_activity
+            if self.activity != new_activity:
+                self.activity = new_activity
                 self.rpc.update(activity)
-                log(f'RPC updated, new activity: {activity}')
+                if self.on_activity_changed:
+                    self.on_activity_changed()
+
+                log(f'RPC updated, new activity: {self.activity}')
             time.sleep(UPDATE_FREQUENCE)
 
-        self.rpc.clear()
         self.rpc.close()
-        log('RPC cleared')
+        log('RPC Closed')
         log('AniList Discord RPC stopped')

@@ -21,4 +21,4 @@ class Activity:
 			and self.title == other.title
 			and self.progress == other.progress
 			and self.site_url == other.site_url
-		) 
+		)
