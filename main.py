@@ -4,6 +4,7 @@ import threading
 from server import Server
 from dotenv import load_dotenv
 from os import getenv
+import webbrowser
 import os, sys
 
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
@@ -24,15 +25,19 @@ def on_quit_clicked(icon, item):
 
 def on_title_clicked(icon, item):
 	if server.activity:
-		os.open(server.activity.site_url)
+		webbrowser.open(server.activity.site_url)
 
 def build_menu():
-	return Menu(
-		MenuItem(
-			lambda item: server.activity.title if server.activity else "loading...", 
-			action= None,
+	if server.activity:
+		title_item = MenuItem(server.activity.title, on_title_clicked)
+	else:
+		title_item = MenuItem(
+			item="loading...",
+			action=None,
 			enabled=False
-		),
+		)
+	return Menu(
+		title_item,
 		MenuItem('Update', on_update_clicked),
 		MenuItem('Quit', on_quit_clicked)
 	)
