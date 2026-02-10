@@ -40,7 +40,7 @@ class Server:
             new_activity = get_last_activity(ANILIST_USERID)
             if self.activity != new_activity:
                 self.activity = new_activity
-                self.rpc.update(activity)
+                self.rpc.update(self.activity)
                 if self.on_activity_changed:
                     self.on_activity_changed()
 
